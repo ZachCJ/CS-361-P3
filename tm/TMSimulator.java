@@ -9,25 +9,45 @@ import java.util.*;
  * @author Zach johnson, Antonio hernandez
  */
 public class TMSimulator {
-    public int numberOfState;
-    public int numberOfSymbols;
-    // ? Transitions
-    public String inputString; // if blank machine starts with empty tape
 
     public static void main(String[] args) {
+        int numberOfStates;
+        int numberOfSymbols;
+        ArrayList<String> transitions = new ArrayList<>();
+        String inputString = ""; // if blank machine starts with empty tape
+
+        // Getting input file name
         String fileName = args[0];
 
-        // Reading in input file
-        System.out.println("Filename =>" + args[0]);
-
+        // Reading data from input file
         try {
             File inputFile = new File(fileName);
             Scanner scanner = new Scanner(inputFile);
+
+            numberOfStates = scanner.nextInt();
+            numberOfSymbols = scanner.nextInt();
+
+            // Read the rest of the file
             while (scanner.hasNextLine()) {
                 String data = scanner.nextLine();
-                System.out.println(data);
+                transitions.add(data);
             }
+
             scanner.close();
+
+            // checking if the last line was blank or input
+            String lastLine = transitions.get(transitions.size() - 1);
+            if (!lastLine.contains(",")) {
+                inputString = lastLine;
+            }
+            System.out.println("First line total number of state: " + numberOfStates);
+            System.out.println("Second line number of symbols in alphabet Σ: " + numberOfSymbols);
+            System.out.println("Transitions: ");
+            for (String string : transitions) {
+                System.out.println(string);
+            }
+            System.out.println("Last line input string: " + inputString);
+
         } catch (Exception e) {
             System.err.println("Error reading file");
             e.printStackTrace();
