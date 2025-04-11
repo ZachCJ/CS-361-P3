@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * Main driver class that runs the simulation
  * 
- * @author Zach johnson, Antonio hernandez
+ * @author Zach Johnston, Antonio Hernandez
  */
 public class TMSimulator {
 
