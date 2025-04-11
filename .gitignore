@@ -1,0 +1,6 @@
+# Ingnoring IDE files - Zach
+*.xml
+*.iml
+
+#Ingoring Class Files
+*.class
