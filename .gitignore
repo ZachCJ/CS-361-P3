@@ -1,2 +1,5 @@
+# Ingnoring IDE files - Zach
+*.xml
+*.iml
 testtony.java
 *.class
