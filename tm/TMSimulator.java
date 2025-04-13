@@ -3,6 +3,8 @@ package tm;
 import java.io.*;
 import java.util.*;
 
+// import tm.TMState;
+
 /**
  * Main driver class that runs the simulation
  * 
@@ -11,7 +13,7 @@ import java.util.*;
 public class TMSimulator {
 
     public static void main(String[] args) {
-        int numberOfStates;
+        int numberOfStates = 0;
         int numberOfSymbols;
         ArrayList<String> transitions = new ArrayList<>();
         String inputString = ""; // if blank machine starts with empty tape
@@ -52,6 +54,13 @@ public class TMSimulator {
             System.err.println("Error reading file");
             e.printStackTrace();
         }
+        // Check that file was read correctly TODO
+
+        // for (int i = 0; i < numberOfStates; i++) {
+        // TMState state = new TMState(i);
+
+        // System.out.println(state.toString());
+        // }
 
     }
 
