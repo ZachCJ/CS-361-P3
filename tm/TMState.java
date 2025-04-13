@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class TMState {
 
     // Instance variables
-    private int stateNumber; // State number
+    private int stateName; // State number
 
     /**
      * A list of transitions that this state can take.
@@ -22,11 +22,11 @@ public class TMState {
     /**
      * Constructs a new TMState
      *
-     * @param stateNumber     the identifier for this state
+     * @param stateName       the identifier for this state
      * @param numberOfSymbols the number of symbols (not used currently)
      */
-    public TMState(int stateNumber) {
-        this.stateNumber = stateNumber;
+    public TMState(int stateName) {
+        this.stateName = stateName;
         this.stateTransitions = new ArrayList<>();
     }
 
@@ -66,7 +66,7 @@ public class TMState {
      * @return Boolean representing if this is the halting state or not
      */
     public boolean isHaltingState(int totalStates) {
-        return this.stateNumber == totalStates - 1;
+        return this.stateName == totalStates - 1;
     }
 
     /**
@@ -77,7 +77,7 @@ public class TMState {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("State ").append(stateNumber).append(" Transitions:\n");
+        sb.append("State ").append(stateName).append(" Transitions:\n");
         for (int i = 0; i < stateTransitions.size(); i++) {
             Transition t = stateTransitions.get(i);
             sb.append("  Transition On ").append(i).append(": ");
