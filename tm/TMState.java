@@ -60,6 +60,16 @@ public class TMState {
     }
 
     /**
+     * Gets the states transition for a given symbol
+     * 
+     * @param symbolIndex - Symbol we want the transition for
+     * @return String of the the transition for the given symbol
+     */
+    public int getStateName() {
+        return this.stateName;
+    }
+
+    /**
      * Returns whether the state is the halting state or not
      * 
      * @param totalStates - total number of states in the TM
