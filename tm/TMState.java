@@ -88,12 +88,17 @@ public class TMState {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("State ").append(stateName).append(" Transitions:\n");
-        for (int i = 0; i < stateTransitions.size(); i++) {
-            Transition t = stateTransitions.get(i);
-            sb.append("  Transition On ").append(i).append(": ");
-            sb.append("NextState=").append(t.getNextState()).append(", ");
-            sb.append("WriteSymbol=").append(t.getWriteSymbol()).append(", ");
-            sb.append("Move=").append(t.getMove()).append("\n");
+        if (stateTransitions.size() == 0) {
+            sb.append("  Halting State, No transitions");
+        } else {
+            for (int i = 0; i < stateTransitions.size(); i++) {
+                Transition t = stateTransitions.get(i);
+                sb.append("  Transition On ").append(i).append(": ");
+                sb.append("NextState=").append(t.getNextState()).append(", ");
+                sb.append("WriteSymbol=").append(t.getWriteSymbol()).append(", ");
+                sb.append("Move=").append(t.getMove()).append("\n");
+            }
+
         }
         return sb.toString();
     }
