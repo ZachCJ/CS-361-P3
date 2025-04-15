@@ -14,23 +14,22 @@ import tm.TMTape;
  */
 public class TuringMachine {
     // Instance Variables
-    private Map<Integer, TMState> machineStates; // All states in machine
-    private ArrayList<String> allMachineTransitions;
+    private ArrayList<TMState> machineStates;
+    private Map<String, Transition[]> allMachineTransitions; // All the transitions in the machine
     private TMTape machineTape; // Tape associated with the machine
-    private TMState currentState;
-    private TMState haltingState;
+    private TMState currentState; // Where the head is pointing at
+    private TMState haltingState; // Halting state should be the n-1 state (Last state in machine)
 
     // Constructor
-    public TuringMachine(int numStates, int numSymbols, ArrayList<String> allMachineTransitions) {
-        this.machineStates = new HashMap<>();
-        this.allMachineTransitions = allMachineTransitions;
+    public TuringMachine(ArrayList<TMState> machineStates, int numSymbols,
+            Map<String, Transition[]> allMachineTransitions) {
 
-        // Initialize states
-        for (int i = 0; i < numStates; i++) {
-            TMState newState = new TMState(i);
-            machineStates.put(i, newState);
-        }
-        // add each states transitions
+        this.machineStates = machineStates;
+        this.allMachineTransitions = allMachineTransitions;
+        this.machineTape = new TMTape();
+        this.currentState = machineStates.get(0);
+        this.haltingState = machineStates.get(machineStates.size() - 1);
+
     }
 
     // Class Methods
@@ -52,9 +51,11 @@ public class TuringMachine {
         sb.append("Tape: ").append(machineTape != null ? machineTape.toString() : "null").append("\n\n");
 
         sb.append("States and Transitions:\n");
-        for (Map.Entry<Integer, TMState> entry : machineStates.entrySet()) {
-            TMState value = entry.getValue();
-            sb.append(value.toString());
+
+        // Iterate over each state and its transitions
+        for (TMState state : machineStates) {
+            sb.append(state.toString());
+            sb.append("\n");
         }
 
         return sb.toString();
