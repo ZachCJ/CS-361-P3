@@ -2,6 +2,7 @@ package tm;
 
 import java.io.*;
 import java.util.*;
+import tm.TuringMachine;
 
 // import tm.TMState;
 
@@ -15,7 +16,9 @@ public class TMSimulator {
     public static void main(String[] args) {
         int numberOfStates = 0;
         int numberOfSymbols;
+        ArrayList<TMState> machineStates = new ArrayList<>();
         ArrayList<String> transitions = new ArrayList<>();
+        Map<String, Transition[]> stateTransitions = new HashMap<>();
         String inputString = ""; // if blank machine starts with empty tape
 
         // Getting input file name
@@ -28,7 +31,7 @@ public class TMSimulator {
 
             numberOfStates = scanner.nextInt();
             numberOfSymbols = scanner.nextInt();
-
+            scanner.nextLine();
             // Read the rest of the file
             while (scanner.hasNextLine()) {
                 String data = scanner.nextLine();
@@ -39,28 +42,50 @@ public class TMSimulator {
 
             // checking if the last line was blank or input
             String lastLine = transitions.get(transitions.size() - 1);
+            // IF the last line in the input file is not blank set input to it
+            // and remove it from transitions array
             if (!lastLine.contains(",")) {
                 inputString = lastLine;
+                transitions.remove(transitions.size() - 1);
             }
-            System.out.println("First line total number of state: " + numberOfStates);
-            System.out.println("Second line number of symbols in alphabet Σ: " + numberOfSymbols);
-            System.out.println("Transitions: ");
-            for (String string : transitions) {
-                System.out.println(string);
+
+            // Map state and their corresponding transitions
+            int start = 0;
+            int state = 0;
+            // Loop through all the transitions and map state to them
+            while (start < transitions.size()) {
+                // Create New State
+                TMState newState = new TMState(state);
+
+                Transition[] transitionArray = new Transition[numberOfSymbols + 1];
+                int end = Math.min(start + (numberOfSymbols + 1), transitions.size());
+                ArrayList<String> subArray = new ArrayList<>(transitions.subList(start, end));
+
+                // Make each transition String into a Transition
+                for (int i = 0; i < transitionArray.length; i++) {
+                    Transition newTransition = new Transition(subArray.get(i), i);
+                    // Add transition to state
+                    newState.addTransition(newTransition);
+                    transitionArray[i] = newTransition;
+
+                }
+                start = end;
+                machineStates.add(newState);
+                stateTransitions.put(Integer.toString(state), transitionArray);
+                state++;
             }
-            System.out.println("Last line input string: " + inputString);
+            // Add halting state
+            machineStates.add(new TMState(numberOfStates - 1));
+
+            TuringMachine turingMachine = new TuringMachine(machineStates,
+                    numberOfSymbols, stateTransitions);
+
+            System.out.println(turingMachine.toString());
 
         } catch (Exception e) {
             System.err.println("Error reading file");
             e.printStackTrace();
         }
-        // Check that file was read correctly TODO
-
-        // for (int i = 0; i < numberOfStates; i++) {
-        // TMState state = new TMState(i);
-
-        // System.out.println(state.toString());
-        // }
 
     }
 
