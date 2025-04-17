@@ -78,9 +78,22 @@ public class TMSimulator {
             machineStates.add(new TMState(numberOfStates - 1));
 
             TuringMachine turingMachine = new TuringMachine(machineStates,
-                    numberOfSymbols, stateTransitions);
+                    numberOfSymbols, stateTransitions, inputString);
+
+            // DEBUG Machine has been correctly instantiated
 
             System.out.println(turingMachine.toString());
+            System.out.println("Machine input: " + inputString);
+            boolean isHalted = false;
+
+            // Run simulation until the machine is in a halted state
+            while (!isHalted) {
+                isHalted = turingMachine.step();
+                System.out.println("----------------------------------------------");
+            }
+            System.out.println("Simulation ended: ");
+            // Print out tape:
+            System.out.println("Machine Tape output: " + turingMachine.machineTape.toString());
 
         } catch (Exception e) {
             System.err.println("Error reading file");
