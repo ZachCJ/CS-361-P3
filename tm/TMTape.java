@@ -131,6 +131,7 @@ public class TMTape {
         while(read() != 0)
             move('L');
         StringBuilder out = new StringBuilder();
+        move('R');
         while(read() != 0) {
             out.append(read());
             move('R');
