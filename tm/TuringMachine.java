@@ -1,11 +1,7 @@
 package tm;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
-
-import tm.TMState;
-import tm.TMTape;
 
 /**
  * TuringMachine a representation of a turing machine
@@ -21,6 +17,15 @@ public class TuringMachine {
     private TMState haltingState; // Halting state should be the n-1 state (Last state in machine)
 
     // Constructor
+
+    /**
+     * Initializes a turing machine based on the params
+     *
+     * @param machineStates - the states of the turing machine
+     * @param numSymbols - the number of symbols the turing machine will have
+     * @param allMachineTransitions - A map of the transitions between the states
+     * @param intputString - the starting string of the tape of the turing machine
+     */
     public TuringMachine(ArrayList<TMState> machineStates, int numSymbols,
             Map<String, Transition[]> allMachineTransitions, String intputString) {
 
@@ -33,6 +38,12 @@ public class TuringMachine {
     }
 
     // Class Methods
+
+    /**
+     * This method advances the turing machine by one transition
+     *
+     * @return returns true if step ends on a halt state, and false otherwise
+     */
     public boolean step() {
         int currentSymbol = machineTape.read();
         // DEBUG:
