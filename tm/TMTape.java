@@ -140,6 +140,7 @@ public class TMTape {
             out.append(read());
             move('R');
         }
+        out.append(read());
         return out.toString();
     }
 
@@ -160,6 +161,7 @@ public class TMTape {
          *  Creates an empty cell
          */
         protected Cell() {
+            size++;
             next = null;
             previous = null;
             this.store = 0;

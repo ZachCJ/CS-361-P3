@@ -67,7 +67,8 @@ public class TMSimulator {
                     // Add transition to state
                     newState.addTransition(newTransition);
                     transitionArray[i] = newTransition;
-
+                    //DEBUG
+                    //System.out.println("Transition " + state + ": " + newTransition.toString());
                 }
                 start = end;
                 machineStates.add(newState);
@@ -91,7 +92,7 @@ public class TMSimulator {
                 isHalted = turingMachine.step();
                 //System.out.println("----------------------------------------------");
             }
-            System.out.println("Simulation ended: ");
+            //System.out.println("Simulation ended: ");
             // Print out tape:
             System.out.println("output: \n" + turingMachine.machineTape.toString());
             System.out.println("output length: " + turingMachine.machineTape.getSize());
