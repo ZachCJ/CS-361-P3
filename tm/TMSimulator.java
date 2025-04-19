@@ -2,14 +2,22 @@ package tm;
 
 import java.io.*;
 import java.util.*;
-import tm.TuringMachine;
-
-// import tm.TMState;
+import java.util.HashMap;
 
 /**
  * Main driver class that runs the simulation
- * 
  * @author Zach Johnston, Antonio Hernandez
+ *  A file is given to the simulation through the commmand line arguments i.e.
+ *      -java TMSimulator <filename>
+ *  Order of simulation
+ *      1. Read the input file while saving:
+ *          - Number of states the machine will have
+ *          - The number of symbols the machine, uses integer values to represent these symbols
+ *          - The transitions of the turing machine. There are number of states minus one (Halt
+ *            state has no transitions and is always the last) times number of symbols (including the empty symbol) of transitions
+ *      2. Builds the turing machine based on the file data
+ *      3. Runs the turing machine until it reaches the halt state.
+ *      4. Outputs the data of the tape of turing machine
  */
 public class TMSimulator {
 
@@ -81,10 +89,9 @@ public class TMSimulator {
             TuringMachine turingMachine = new TuringMachine(machineStates,
                     numberOfSymbols, stateTransitions, inputString);
 
-            // DEBUG Machine has been correctly instantiated
-
-            //System.out.println(turingMachine.toString());
-            //System.out.println("Machine input: " + inputString);
+            /* DEBUG Machine has been correctly instantiated
+            System.out.println(turingMachine.toString());
+            System.out.println("Machine input: " + inputString);*/
             boolean isHalted = false;
 
             // Run simulation until the machine is in a halted state
@@ -93,9 +100,8 @@ public class TMSimulator {
                 //System.out.println("----------------------------------------------");
             }
             //System.out.println("Simulation ended: ");
-            // Print out tape:
-            System.out.println("output: \n" + turingMachine.machineTape.toString());
-            System.out.println("output length: " + turingMachine.machineTape.getSize());
+            // Print out tape with all data:
+            System.out.println(turingMachine.machineTape.toString());
         } catch (Exception e) {
             System.err.println("Error reading file");
             e.printStackTrace();

@@ -23,7 +23,6 @@ public class TMState {
      * Constructs a new TMState
      *
      * @param stateName       the identifier for this state
-     * @param numberOfSymbols the number of symbols (not used currently)
      */
     public TMState(int stateName) {
         this.stateName = stateName;
@@ -52,18 +51,17 @@ public class TMState {
     /**
      * Gets the states transition for a given symbol
      * 
-     * @param symbolIndex - Symbol we want the transition for
-     * @return String of the transition for the given symbol
+     * @param symbol - Symbol we want the transition for
+     * @return The transition off this state for the given symbol
      */
     public Transition getTransitionForSymbol(int symbol) {
         return stateTransitions.get(symbol);
     }
 
     /**
-     * Gets the states transition for a given symbol
-     * 
-     * @param symbolIndex - Symbol we want the transition for
-     * @return String of the transition for the given symbol
+     * Gets the name of this state
+     *
+     * @return The number (i.e. name) of this state.
      */
     public int getStateName() {
         return this.stateName;
@@ -102,7 +100,4 @@ public class TMState {
         }
         return sb.toString();
     }
-
-    // Methods
-
 }

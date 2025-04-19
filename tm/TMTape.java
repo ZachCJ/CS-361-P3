@@ -1,5 +1,7 @@
 package tm;
 
+import java.lang.StringBuilder;
+
 /**
  * @author Zach Johnston, Antonio Herndanez
  * @version 1.00, 04/11/25
@@ -34,10 +36,6 @@ public class TMTape {
     public TMTape(String str) {
         this();
         fill(str);
-    }
-
-    public long getSize() {
-        return size;
     }
 
     /**
@@ -125,7 +123,11 @@ public class TMTape {
 
     /**
      * Overridden toString
-     *      Builds a string that encompasses the values store on the tape in order then
+     *      Builds a string that encompasses the tape as a whole.
+     *          This string contains the data:
+     *              - Tape Contents
+     *              - Number of Cells
+     *              - Sum of all Cells
      *      Note: This method only works if the head is on the string, it will provide feedback if it is not.
      * @return - the string stored on the tape
      */
@@ -135,12 +137,20 @@ public class TMTape {
             return "Move head onto string";
         while(tapeHead.isNotStartBoundary())
             move('L');
-        StringBuilder out = new StringBuilder();
+        StringBuilder out = new StringBuilder("output: \n");
+        long sum = 0;
+        //Build tape string
         while(tapeHead.isNotEndBoundary()) {
-            out.append(read());
+            int value = read();
+            out.append(value);
+            sum += value;
             move('R');
         }
-        out.append(read());
+        int value = read();
+        out.append(value);
+        sum += value;
+        //Add size
+        out.append("\noutput length: ").append(size).append("\nsum of symbols: ").append(sum);
         return out.toString();
     }
 
@@ -229,14 +239,6 @@ public class TMTape {
             return previous;
         }
 
-        protected boolean isNotStartBoundary() {
-            return previous != null;
-        }
-
-        protected boolean isNotEndBoundary() {
-            return next != null;
-        }
-
         /**
          * Set Method
          *  Sets a new store value for the cell
@@ -244,6 +246,25 @@ public class TMTape {
          */
         protected void setVal(int store) {
             this.store = store;
+        }
+
+        /**
+         * Check Method
+         *      Sees if the current cell is on the starting edge of the tape
+         *      - This is useful for making sure the tape isn't grown when the growth is not intended
+         * @return returns true if this is the leftmost cell on the tape, and false otherwise
+         */
+        protected boolean isNotStartBoundary() {
+            return previous != null;
+        }
+        /**
+         * Check Method
+         *      Sees if the current cell is on the end edge of the tape
+         *      - This is useful for making sure the tape isn't grown when the growth is not intended
+         * @return returns true if this is the rightmost cell on the tape, and false otherwise
+         */
+        protected boolean isNotEndBoundary() {
+            return next != null;
         }
     }
 }
