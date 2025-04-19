@@ -15,12 +15,14 @@ package tm;
 public class TMTape {
 
     Cell tapeHead;
+    static long size;
 
     /**
      * Constructor
      *  Creates a new empty tape
      */
     public TMTape() {
+        size = 0;
         tapeHead = new Cell();
     }
 
@@ -32,6 +34,10 @@ public class TMTape {
     public TMTape(String str) {
         this();
         fill(str);
+    }
+
+    public long getSize() {
+        return size;
     }
 
     /**
@@ -72,7 +78,6 @@ public class TMTape {
     /**
      * This method takes an input string and fills the tape with that string.
      *  The head is moved to the beginning of the string.
-     * TODO: Make recursive?
      * @param input - a string of symbols to fill the tape
      * @exception IllegalArgumentException - Occurs if the value fed from the string is not valid for the Turing machine i.e
      *      - the value is any character that is not a digit.
@@ -128,13 +133,14 @@ public class TMTape {
     public String toString() {
         if(tapeHead.next == null || tapeHead.previous == null)
             return "Move head onto string";
-        while(read() != 0)
+        while(tapeHead.isNotStartBoundary())
             move('L');
         StringBuilder out = new StringBuilder();
-        while(read() != 0) {
+        while(tapeHead.isNotEndBoundary()) {
             out.append(read());
             move('R');
         }
+        out.append(read());
         return out.toString();
     }
 
@@ -155,6 +161,7 @@ public class TMTape {
          *  Creates an empty cell
          */
         protected Cell() {
+            size++;
             next = null;
             previous = null;
             this.store = 0;
@@ -182,6 +189,7 @@ public class TMTape {
          */
         private Cell(Cell previous, Cell next) {
             store = 0;
+            size++;
             this.previous = previous;
             this.next = next;
         }
@@ -219,6 +227,14 @@ public class TMTape {
                 previous = new Cell(null,this);
             }
             return previous;
+        }
+
+        protected boolean isNotStartBoundary() {
+            return previous != null;
+        }
+
+        protected boolean isNotEndBoundary() {
+            return next != null;
         }
 
         /**

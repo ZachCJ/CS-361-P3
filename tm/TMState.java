@@ -53,7 +53,7 @@ public class TMState {
      * Gets the states transition for a given symbol
      * 
      * @param symbolIndex - Symbol we want the transition for
-     * @return String of the the transition for the given symbol
+     * @return String of the transition for the given symbol
      */
     public Transition getTransitionForSymbol(int symbol) {
         return stateTransitions.get(symbol);
@@ -63,7 +63,7 @@ public class TMState {
      * Gets the states transition for a given symbol
      * 
      * @param symbolIndex - Symbol we want the transition for
-     * @return String of the the transition for the given symbol
+     * @return String of the transition for the given symbol
      */
     public int getStateName() {
         return this.stateName;
@@ -88,7 +88,7 @@ public class TMState {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("State ").append(stateName).append(" Transitions:\n");
-        if (stateTransitions.size() == 0) {
+        if (stateTransitions.isEmpty()) {
             sb.append("  Halting State, No transitions");
         } else {
             for (int i = 0; i < stateTransitions.size(); i++) {
