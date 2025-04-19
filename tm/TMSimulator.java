@@ -82,18 +82,19 @@ public class TMSimulator {
 
             // DEBUG Machine has been correctly instantiated
 
-            System.out.println(turingMachine.toString());
-            System.out.println("Machine input: " + inputString);
+            //System.out.println(turingMachine.toString());
+            //System.out.println("Machine input: " + inputString);
             boolean isHalted = false;
 
             // Run simulation until the machine is in a halted state
             while (!isHalted) {
                 isHalted = turingMachine.step();
-                System.out.println("----------------------------------------------");
+                //System.out.println("----------------------------------------------");
             }
             System.out.println("Simulation ended: ");
             // Print out tape:
-            System.out.println("Machine Tape output: " + turingMachine.machineTape.toString());
+            System.out.println("output: \n" + turingMachine.machineTape.toString());
+            System.out.println("output length: " + turingMachine.machineTape.getSize());
         } catch (Exception e) {
             System.err.println("Error reading file");
             e.printStackTrace();

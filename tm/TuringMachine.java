@@ -36,14 +36,14 @@ public class TuringMachine {
     public boolean step() {
         int currentSymbol = machineTape.read();
         // DEBUG:
-        System.out.println("Current State: " + currentState.getStateName());
+        //System.out.println("Current State: " + currentState.getStateName());
 
         Transition[] transitions = allMachineTransitions.get(Integer.toString(currentState.getStateName()));
         // DEBUG:
-        System.out.println("Current Symbol Transitions: ");
-        for (Transition transition : transitions) {
-            System.out.println(transition);
-        }
+        //System.out.println("Current Symbol Transitions: ");
+        //for (Transition transition : transitions) {
+        //    System.out.println(transition);
+        //}
 
         // If there are not transitions should be in halting state
         if (transitions == null) {
@@ -53,12 +53,12 @@ public class TuringMachine {
         // Get next transition based on current symbol
         Transition nextTransition = transitions[currentSymbol];
         // DEBUG:
-        System.out.println("Transition: " + nextTransition.toString());
+        //System.out.println("Transition: " + nextTransition.toString());
 
         // writing to tape:
         machineTape.write(nextTransition.getWriteSymbol());
         // DEBUG
-        System.out.println("Writing: " + nextTransition.getWriteSymbol());
+        //System.out.println("Writing: " + nextTransition.getWriteSymbol());
 
         // move head
         if (nextTransition.getMove() == 'L') {
@@ -67,12 +67,12 @@ public class TuringMachine {
             machineTape.move('R');
         }
         // DEBUG
-        System.out.println("Moving: " + nextTransition.getMove());
+        //System.out.println("Moving: " + nextTransition.getMove());
 
         // Change state
         currentState = machineStates.get(nextTransition.getNextState());
         // DEBUG
-        System.out.println("Updated State: " + currentState.getStateName());
+        //System.out.println("Updated State: " + currentState.getStateName());
 
         // Halt if in halting state
         return currentState.getStateName() == haltingState.getStateName();

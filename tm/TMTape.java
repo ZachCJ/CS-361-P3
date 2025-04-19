@@ -15,12 +15,14 @@ package tm;
 public class TMTape {
 
     Cell tapeHead;
+    static long size;
 
     /**
      * Constructor
      *  Creates a new empty tape
      */
     public TMTape() {
+        size = 0;
         tapeHead = new Cell();
     }
 
@@ -32,6 +34,10 @@ public class TMTape {
     public TMTape(String str) {
         this();
         fill(str);
+    }
+
+    public long getSize() {
+        return size;
     }
 
     /**
@@ -127,11 +133,10 @@ public class TMTape {
     public String toString() {
         if(tapeHead.next == null || tapeHead.previous == null)
             return "Move head onto string";
-        while(read() != 0)
+        while(tapeHead.isNotStartBoundary())
             move('L');
-        move('R');
         StringBuilder out = new StringBuilder();
-        while(read() != 0) {
+        while(tapeHead.isNotEndBoundary()) {
             out.append(read());
             move('R');
         }
@@ -182,6 +187,7 @@ public class TMTape {
          */
         private Cell(Cell previous, Cell next) {
             store = 0;
+            size++;
             this.previous = previous;
             this.next = next;
         }
@@ -219,6 +225,14 @@ public class TMTape {
                 previous = new Cell(null,this);
             }
             return previous;
+        }
+
+        protected boolean isNotStartBoundary() {
+            return previous != null;
+        }
+
+        protected boolean isNotEndBoundary() {
+            return next != null;
         }
 
         /**
