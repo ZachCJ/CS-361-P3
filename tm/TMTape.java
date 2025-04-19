@@ -130,6 +130,7 @@ public class TMTape {
             return "Move head onto string";
         while(read() != 0)
             move('L');
+        move('R');
         StringBuilder out = new StringBuilder();
         while(read() != 0) {
             out.append(read());
