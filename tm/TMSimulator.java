@@ -94,12 +94,10 @@ public class TMSimulator {
             System.out.println("Simulation ended: ");
             // Print out tape:
             System.out.println("Machine Tape output: " + turingMachine.machineTape.toString());
-
         } catch (Exception e) {
             System.err.println("Error reading file");
             e.printStackTrace();
         }
-
     }
 
 }

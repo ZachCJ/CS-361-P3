@@ -11,8 +11,8 @@ import java.util.StringTokenizer;
  */
 public class Transition {
     // ** Instance Variables
-    private String nextState; // State that the machine transitions to
-    private String writeSymbol; // Symbol the machine will write to the cell
+    private int nextState; // State that the machine transitions to
+    private int writeSymbol; // Symbol the machine will write to the cell
     private char move; // Direction, either L or R to move the tape head to
 
     private int transitionOnSymbol;
@@ -30,8 +30,8 @@ public class Transition {
 
         // Parse input transition using StringTokenizer
         StringTokenizer st = new StringTokenizer(transition, ",");
-        this.nextState = st.nextToken();
-        this.writeSymbol = st.nextToken();
+        this.nextState = Integer.parseInt(st.nextToken());
+        this.writeSymbol = Integer.parseInt(st.nextToken());
         this.move = st.nextToken().charAt(0);
     }
 
@@ -41,7 +41,7 @@ public class Transition {
      *
      * @return the next state
      */
-    public String getNextState() {
+    public int getNextState() {
         return nextState;
     }
 
@@ -50,7 +50,7 @@ public class Transition {
      *
      * @return the symbol to write
      */
-    public String getWriteSymbol() {
+    public int getWriteSymbol() {
         return writeSymbol;
     }
 

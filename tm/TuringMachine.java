@@ -56,7 +56,7 @@ public class TuringMachine {
         System.out.println("Transition: " + nextTransition.toString());
 
         // writing to tape:
-        machineTape.write(Integer.parseInt(nextTransition.getWriteSymbol()));
+        machineTape.write(nextTransition.getWriteSymbol());
         // DEBUG
         System.out.println("Writing: " + nextTransition.getWriteSymbol());
 
@@ -70,13 +70,12 @@ public class TuringMachine {
         System.out.println("Moving: " + nextTransition.getMove());
 
         // Change state
-        currentState = machineStates.get(Integer.parseInt(nextTransition.getNextState()));
+        currentState = machineStates.get(nextTransition.getNextState());
         // DEBUG
         System.out.println("Updated State: " + currentState.getStateName());
 
         // Halt if in halting state
         return currentState.getStateName() == haltingState.getStateName();
-
     }
 
     /**

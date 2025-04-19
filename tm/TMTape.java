@@ -72,7 +72,6 @@ public class TMTape {
     /**
      * This method takes an input string and fills the tape with that string.
      *  The head is moved to the beginning of the string.
-     * TODO: Make recursive?
      * @param input - a string of symbols to fill the tape
      * @exception IllegalArgumentException - Occurs if the value fed from the string is not valid for the Turing machine i.e
      *      - the value is any character that is not a digit.
