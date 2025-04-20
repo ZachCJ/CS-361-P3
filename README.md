@@ -19,6 +19,10 @@ After that I mostly worked debugging, documentation, and making sure the project
 I was going to toy with the idea of multithreading to improve performance, but my busy schedule didn't give the time to do that, unfortunately.
 The most difficult part of this project was really understanding how the input file works and how that affects the turing machine as a result.
 
+
+Antonio hernandez - Overall completion of the project went smoothly. The beginning was a bit difficult because were give a goal but no real steps to follow or any code to start from. This meant that we had to come up with the game plan to complete the project on our own. This was a bit difficult but ultimately fun and made finishing the project satisfying. 
+My main evolvement in the project was writing the Transition, and TMState files along with working with Zach on the Turing machine file to be able to run simulations. We held an in person meeting before starting the project to discuss how we would tackle the project and that helped alot. There were no big hiccups this time around and development went smoothly.
+
 ## Compiling and Using
 
 Compiling:
